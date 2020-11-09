@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ImageValidators } from '../image.validators';
 
 @Component({
   selector: 'app-product',
@@ -16,11 +17,18 @@ export class ProductComponent {
     ]),
     description: new FormControl('',[Validators.required]),
     price: new FormControl('',[Validators.required]),
-    imageUrl: new FormControl('',[Validators.required])
+    imageUrl: new FormControl('',[
+      Validators.required,
+      ImageValidators.isValidExtension
+    ])
   });
 
   get name(){
     return this.productForm.get('name');
+  }
+
+  get imageUrl(){
+    return this.productForm.get('imageUrl');
   }
 
 
